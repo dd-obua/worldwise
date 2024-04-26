@@ -10,7 +10,6 @@ const Sidebar = function () {
       <Logo />
       <AppNav />
       <p>List of cities</p>
-
       <Footer />
     </div>
   );
