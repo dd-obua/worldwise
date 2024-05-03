@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
+
 const CitiesContext = createContext();
 
 const baseUrl = 'http://localhost:8000';
@@ -8,6 +9,7 @@ const baseUrl = 'http://localhost:8000';
 const CitiesProvider = function ({ children }) {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({});
 
   useEffect(function () {
     async function fetchCities() {
@@ -26,8 +28,21 @@ const CitiesProvider = function ({ children }) {
     fetchCities();
   }, []);
 
+  const getCity = async function (id) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${baseUrl}/cities/${id}`);
+      const data = await res.json();
+      setCurrentCity(data);
+    } catch {
+      alert('There was an error loading data...');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading }}>
+    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
       {children}
     </CitiesContext.Provider>
   );
