@@ -19,8 +19,8 @@ const CityList = function ({ cities, isLoading }) {
 };
 
 CityList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  cities: PropTypes.array,
+  isLoading: PropTypes.bool,
 };
 
 export default CityList;

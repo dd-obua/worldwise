@@ -30,7 +30,7 @@ const CountryList = function ({ cities, isLoading }) {
 CountryList.propTypes = {
   cities: PropTypes.array,
   country: PropTypes.string,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 export default CountryList;
