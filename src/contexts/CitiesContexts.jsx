@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
-
 const CitiesContext = createContext();
 
 const baseUrl = 'http://localhost:8000';
@@ -34,10 +33,17 @@ const CitiesProvider = function ({ children }) {
   );
 };
 
+const useCities = function () {
+  const context = useContext(CitiesContext);
+  if (context === undefined)
+    throw new Error('CitiesContext was used outside the CitiesProvider');
+  return context;
+};
+
 CitiesProvider.propTypes = {
   cities: PropTypes.array,
   isLoading: PropTypes.bool,
   children: PropTypes.node,
 };
 
-export { CitiesContext, CitiesProvider };
+export { CitiesProvider, useCities };
