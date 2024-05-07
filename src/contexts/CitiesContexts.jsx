@@ -1,10 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const CitiesContext = createContext();
 
-const baseUrl = 'http://localhost:8000';
+const baseUrl = "http://localhost:8000";
 
 const CitiesProvider = function ({ children }) {
   const [cities, setCities] = useState([]);
@@ -19,7 +19,7 @@ const CitiesProvider = function ({ children }) {
         const data = await res.json();
         setCities(data);
       } catch {
-        alert('There was an error loading data...');
+        alert("There was an error loading data...");
       } finally {
         setIsLoading(false);
       }
@@ -35,7 +35,7 @@ const CitiesProvider = function ({ children }) {
       const data = await res.json();
       setCurrentCity(data);
     } catch {
-      alert('There was an error loading data...');
+      alert("There was an error loading data...");
     } finally {
       setIsLoading(false);
     }
@@ -49,10 +49,10 @@ const CitiesProvider = function ({ children }) {
 };
 
 const useCities = function () {
-  const context = useContext(CitiesContext);
-  if (context === undefined)
-    throw new Error('CitiesContext was used outside the CitiesProvider');
-  return context;
+  const value = useContext(CitiesContext);
+  if (value === undefined)
+    throw new Error("CitiesContext was used outside the CitiesProvider");
+  return value;
 };
 
 CitiesProvider.propTypes = {
