@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
-import styles from './CountryItem.module.css';
+import PropTypes from "prop-types";
+
+import styles from "./CountryItem.module.css";
 
 function CountryItem({ country }) {
   return (
