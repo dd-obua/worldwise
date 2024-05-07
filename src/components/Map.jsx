@@ -1,9 +1,16 @@
 import PropTypes from "prop-types";
 
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import styles from "./Map.module.css";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContexts";
 
@@ -47,6 +54,7 @@ const Map = function () {
           </Marker>
         ))}
         <ChangeCenter position={mapPosition} />
+        <DetectClick />
       </MapContainer>
     </div>
   );
@@ -56,6 +64,16 @@ const ChangeCenter = function ({ position }) {
   const map = useMap();
   map.setView(position);
   return null;
+};
+
+const DetectClick = function () {
+  const navigate = useNavigate();
+  useMapEvents({
+    click: (e) => {
+      const { lat, lng } = e.latlng;
+      navigate(`form?lat=${lat}&lng=${lng}`);
+    },
+  });
 };
 
 ChangeCenter.propTypes = {
