@@ -49,7 +49,7 @@ const reducer = function (state, action) {
 
 const CitiesProvider = function ({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { cities, isLoading, currentCity } = state;
+  const { cities, isLoading, currentCity, error } = state;
 
   useEffect(function () {
     async function fetchCities() {
@@ -132,6 +132,7 @@ const CitiesProvider = function ({ children }) {
         cities,
         isLoading,
         currentCity,
+        error,
         getCity,
         createCity,
         deleteCity,
