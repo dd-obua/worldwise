@@ -63,7 +63,7 @@ function Form() {
 
   return (
     <form className={styles.form}>
-      <div className={styles.row}>
+      <p className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
           id="cityName"
@@ -71,25 +71,25 @@ function Form() {
           value={cityName}
         />
         <span className={styles.flag}>{emoji}</span>
-      </div>
+      </p>
 
-      <div className={styles.row}>
+      <p className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
         <input
           id="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
         />
-      </div>
+      </p>
 
-      <div className={styles.row}>
+      <p className={styles.row}>
         <label htmlFor="notes">Notes about your trip to {cityName}</label>
         <textarea
           id="notes"
           onChange={(e) => setNotes(e.target.value)}
           value={notes}
         />
-      </div>
+      </p>
 
       <Button>Clever</Button>
       <div className={styles.buttons}>
