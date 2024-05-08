@@ -28,6 +28,8 @@ function Form() {
 
   useEffect(
     function () {
+      if (!lat || !lng) return;
+
       const fetchCityData = async function () {
         try {
           setIsLoadingGeocoding(false);
