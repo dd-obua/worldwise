@@ -71,6 +71,8 @@ const CitiesProvider = function ({ children }) {
   }, []);
 
   const getCity = async function (id) {
+    if (Number(id) === createCity.id) return;
+
     dispatch({ type: "loading" });
 
     try {
