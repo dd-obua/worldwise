@@ -3,8 +3,9 @@
 import styles from "./Form.module.css";
 
 import { useEffect, useState } from "react";
-
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useCities } from "../contexts/CitiesContexts";
+
 import { convertToEmoji } from "../supportFiles/convertToEmoji";
 
 import Button from "./Button";
@@ -16,12 +17,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function Form() {
+  const [lat, lng] = useUrlPosition();
+  const { createCity } = useCities();
+
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [emoji, setEmoji] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
-  const [lat, lng] = useUrlPosition();
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [geocodingError, setGeocodingError] = useState("");
 
@@ -63,13 +66,30 @@ function Form() {
     [lat, lng]
   );
 
+  const handleSubmit = function (e) {
+    e.preventDefault();
+
+    if (!cityName || !date) return;
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+    };
+
+    createCity(newCity);
+  };
+
   if (isLoadingGeocoding) return <Spinner />;
   if (!lat || !lng)
     return <Message message="Start by clicking somewhere on the map" />;
   if (geocodingError) return <Message message={geocodingError} />;
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <p className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -100,16 +120,9 @@ function Form() {
         />
       </p>
 
-      <Button>Clever</Button>
+      {/* <Button>Clever</Button> */}
       <div className={styles.buttons}>
-        <Button
-          type="primary"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          Add
-        </Button>
+        <Button type="primary">Add</Button>
         {/* <Button
           type="back"
           onClick={(e) => {
