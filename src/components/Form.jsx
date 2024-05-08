@@ -15,10 +15,12 @@ import Spinner from "./Spinner";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
   const [lat, lng] = useUrlPosition();
   const { createCity, isLoading } = useCities();
+  const navigate = useNavigate();
 
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
@@ -66,7 +68,7 @@ function Form() {
     [lat, lng]
   );
 
-  const handleSubmit = function (e) {
+  const handleSubmit = async function (e) {
     e.preventDefault();
 
     if (!cityName || !date) return;
@@ -80,7 +82,8 @@ function Form() {
       position: { lat, lng },
     };
 
-    createCity(newCity);
+    await createCity(newCity);
+    navigate("/app/cities");
   };
 
   if (isLoadingGeocoding) return <Spinner />;
