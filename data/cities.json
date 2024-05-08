@@ -35,6 +35,30 @@
         "lng": 13.376933665713324
       },
       "id": "98443197"
+    },
+    {
+      "id": "d4f5",
+      "cityName": "Becerril de Campos",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-05-08T11:33:47.697Z",
+      "notes": "Good",
+      "position": {
+        "lat": "42.09822241118974",
+        "lng": "-4.658203125000001"
+      }
+    },
+    {
+      "id": "164a",
+      "cityName": "Mende",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2024-05-08T11:34:29.103Z",
+      "notes": "Great",
+      "position": {
+        "lat": "44.5278427984555",
+        "lng": "3.4277343750000004"
+      }
     }
   ]
 }
