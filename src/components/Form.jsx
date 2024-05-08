@@ -5,12 +5,15 @@ import styles from "./Form.module.css";
 import { useEffect, useState } from "react";
 
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { convertToEmoji } from "../supportFiles/convertToEmoji";
 
 import Button from "./Button";
 import BackButton from "./BackButton";
 import Message from "./Message";
 import Spinner from "./Spinner";
-import { convertToEmoji } from "../supportFiles/convertToEmoji";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Form() {
   const [cityName, setCityName] = useState("");
@@ -79,10 +82,12 @@ function Form() {
 
       <p className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+
+        <DatePicker
           id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+          onChange={(date) => setDate(date)}
+          selected={date}
+          dateFormat="dd/MM/yyyy"
         />
       </p>
 
